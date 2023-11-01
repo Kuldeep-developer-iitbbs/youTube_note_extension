@@ -21,10 +21,32 @@
     const input = document.createElement("input");
     input.type = "text";
     input.placeholder = "Enter description";
+
+    input.addEventListener("keydown", async (event) => {
+      if (event.key === " ") {
+        event.preventDefault();
+      } else if (event.key === "Enter") {
+        const description = input.value;
+        newBookmark.desc = description
+          ? `${description}`
+          : `Bookmark at ${getTime(currentTime)}`;
     
-    input.addEventListener("keydown", (event) => {
-      event.stopPropagation();
+        currentVideoBookmarks = await fetchBookmarks();
+    
+        chrome.storage.sync.set({
+          [currentVideo]: JSON.stringify(
+            [...currentVideoBookmarks, newBookmark].sort(
+              (a, b) => a.time - b.time
+            )
+          ),
+        });
+        youtubeLeftControls.removeChild(input);
+        youtubeLeftControls.removeChild(saveButton);
+      }else {
+        event.stopPropagation();
+      }
     });
+    
   
     const saveButton = document.createElement("button");
     saveButton.textContent = "Save";
@@ -49,8 +71,6 @@
           )
         ),
       });
-  console.log(currentVideo,"currentVideo");
-      console.log(currentVideoBookmarks,"currentVideoBookmarks");
       youtubeLeftControls.removeChild(input);
       youtubeLeftControls.removeChild(saveButton);
     });

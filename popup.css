@@ -1,11 +1,17 @@
 .container {
   width: 280px;
-  color: #314d3e;
+}
+
+body {
+  margin: 0;
+  background-color: gray;
+  font-family: Arial, sans-serif; 
 }
 
 .title {
   font-size: 14px;
   font-weight: bold;
+  color: white;
   padding: 8px;
 }
 
@@ -14,6 +20,9 @@
   font-size: 12px;
   margin: 0;
   padding: 0px 2px;
+  white-space: nowrap;
+  overflow: hidden;   
+  text-overflow: ellipsis;
 }
 
 .textbox:focus {
@@ -28,13 +37,10 @@
 
 .bookmark {
   display: flex;
-  border-bottom-color: #00254d;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
   border-radius: 0.8rem;
   padding: 3px;
-  padding-bottom: 7px;
   margin-bottom: 7px;
+  background-color: white;
 }
 
 .bookmark-title {
@@ -50,4 +56,11 @@
 .bookmark-controls {
   flex: auto;
   text-align: right;
+}
+
+.copyToClipboardButton {
+  border: 0;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 3px;
 }
